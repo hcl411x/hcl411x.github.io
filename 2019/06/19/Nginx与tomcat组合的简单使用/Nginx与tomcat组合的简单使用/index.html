@@ -10,7 +10,7 @@
     
     
     
-    <title>search | 宅窝</title>
+    <title>Nginx与tomcat组合的简单使用 | 宅窝</title>
     <link href="”https://hcl411x.github.io“" rel="”prefetch”">
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,215 +196,83 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://hcl411x.github.io">宅窝</a>
+        >
+        <span>Nginx与tomcat组合的简单使用</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/">Nginx与tomcat组合的简单使用</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Nginx与tomcat/">Nginx与tomcat</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-06-19
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/">Nginx与tomcat组合的简单使用</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-06-19
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Nginx与tomcat/">Nginx与tomcat</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>#Nginx与tomcat组合的简单使用<br>文章版权由作者李晓晖和博客园共有，若转载请于明显处标明出处：<a href="http://www.cnblogs.com/naaoveGIS/" target="_blank" rel="noopener">http://www.cnblogs.com/naaoveGIS/</a></p>
+<p>##1.背景<br>项目中瓦片资源越来越多，如果提高瓦片的访问效率是一个需要解决的问题。这里，我们考虑使用Nginx来代理静态资源进行初步解决。</p>
+<p>##2.Nginx简介<br>ginx (“engine x”) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。Nginx是由Igor Sysoev为俄罗斯访问量第二的Rambler.ru站点开发的。</p>
+<p>何为反向代理呢？即以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。</p>
+<p>而Nginx主要完成的工作就是反向代理，比如我们向一台服务器的80端口发送了请求，该请求首先由Nginx监听到，其接受到请求内容后再转发给其他服务器，其他服务器处理完后再将结果传送给Nginx，最后由Nginx来统一返回给初始请求端。</p>
+<p>Nginx最常见的使用方法就是作为静态资源伺服器，比如将CSS，JS，html，htm等文件进行缓存处理。</p>
+<p>##3.环境搭建</p>
+<p>###3.1下载</p>
+<p>首先在官网中下载所需版本：<a href="http://nginx.org/en/download.html。目前我使用的版本是windows环境下的1.9.15。" target="_blank" rel="noopener">http://nginx.org/en/download.html。目前我使用的版本是windows环境下的1.9.15。</a><br>下载完毕后，解压。</p>
+<p>###3.2开启Nginx<br>开启Nginx有两种方法，一种是直接点击开启，一种是命名行开启。<br>a.点击开启：<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/1.png" alt="Alt text"><br>b.命名行开启：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/2.png" alt="Alt text"><br>开启成功后，在资源管理中可以看到：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/3.png" alt="Alt text"></p>
+<p>###3.3常见问题—启动失败<br>出现启动失败问题，一般是端口冲突问题，比如win7下的IIS已经启动并占用了80端口。在config目录下找到nginx.conf，打开文件进行如下修改：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/4.png" alt="Alt text"></p>
+<p>##4.初步使用</p>
+<p>###4.1用网页测试是否启动成功<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/5.png" alt="Alt text"><br>其中的配置为：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/6.png" alt="Alt text"><br>其表示监听8010端口请求后，会首先去html文件夹下寻找index.html页面。<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/7.png" alt="Alt text"></p>
+<p>###4.2详解部分参数含义<br>listen：表示当前的代理服务器监听的端口，默认的是监听80端口。注意，如果我们配置了多个server，这个listen要配置不一样，不然就不能确定转到哪里去了。<br>server_name：表示监听到之后需要转到哪里去，这时我们直接转到本地，这时是直接到nginx文件夹内。<br>location：表示匹配的路径，这时配置了/表示所有请求都被匹配到这里<br>root：里面配置了root这时表示当匹配这个请求的路径时，将会在这个文件夹内寻找相应的文件，这里对我们之后的静态文件伺服很有用。<br>index：当没有指定主页时，默认会选择这个指定的文件，它可以有多个，并按顺序来加载，如果第一个不存在，则找第二个，依此类推。</p>
+<p>###4.3配置tomcat跳转<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/9.png" alt="Alt text"><br>通过proxy_pass配置请求转发地址。即当访问localhost的8010端口时，请求会跳转至localhost的8080端口处。修改完Nginx的配置后不需要重启Nginx，输入如下命令即可：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/10.png" alt="Alt text"><br>测试如下：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/11.png" alt="Alt text"></p>
+<p>##5.进一步使用</p>
+<p>###5.1静态文件分离配置<br>上面我们直接试了一个小例子，让nginx进行转发，即所谓的反向代理。但实际上我们的需求不会是这样的，我们需要分文件类型来进行过滤，比如jsp直接给tomcat处理，因为nginx并不是servlet容器，没办法处理JSP，而html,js,css这些不需要处理的，直接给nginx进行缓存。<br>      下面我们来进行一下配置，让JSP页面直接给tomcat，而html,png等一些图片和JS等直接给nginx进行缓存。<br>      这时最主要用的还是location这个元素，并且涉及到一部分正则，但不难，具体配置如下：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/12.png" alt="Alt text"><br>此时再直接输入localhost:8010，则会报404错误了。但是输localhost:8010/index.jsp，则一样可以跳转至tomcat首页中。<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/13.png" alt="Alt text"></p>
+<p>###5.2 负载配置<br>当一台服务器出现故障后，我们需要将请求自动转向另一台服务器，此种需求该如何配置呢？利用Nginx也是比较方便能够实现，具体配置如下：<img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/14.png" alt="Alt text"><br>注意，上面还加上了一个weight属性，此属性表示各服务器被访问到的权重，weight越高访问到的几率越高。</p>
+<p>###5.3其他配置<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/15.png" alt="Alt text"></p>
+<p>###5.4关闭Nginx<br><img src="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/16.png" alt="Alt text"></p>
 
-<!-- search自定义页面 -->
-<script type="text/javascript">
+    </div>
+</article>
 
-	var htmlEntityMap = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		'\'': '&#39;',
-		'/': '&#x2F;'
-	};
-
-	// 参照hexo过滤html的方法(事实上感觉静态也没什么可以过滤的)
-	function escapeKey(str) {
-		if (typeof str !== 'string') throw new TypeError('str must be a string!');
-
-		// http://stackoverflow.com/a/12034334
-		return str.replace(/[&<>"'\/]/g, function(a) {
-			return htmlEntityMap[a];
-		});
-	}
-
-	var query = decodeURIComponent(window.location.search).substring(1).split('&')
-    // 获取搜索关键词
-    var s = escapeKey(query[0].split('=')[1])
-    // 获取当前页数
-    var p = query.length > 1 ? query[1].split('=')[1] : 1
-    // 获取每页的页码数
-    var pageSize = '10'
-    var useLeancloud = ''
-    var useComment = ('false' === 'true')
-    $.getJSON('/content.json', function (json) {
-      $('#search-breadcrumb').append(`搜索'${s}'的结果`)
-      var result = getArticles(s, 'posts', json).concat(getArticles(s, 'pages', json))
-      if (result.length === 0 || result.length <= (p - 1) * pageSize) {
-      	// TODO 显示404页面
-      } else {
-        displaySearchResult(result.slice((p - 1) * pageSize, p * pageSize))
-        displayPagination(result)
-      }
-    })
-
-    function getArticles(val, type, json) {
-      return json[type].filter((e) => {
-        return e.title.indexOf(val) !== -1 || e.text.indexOf(val) !== -1
-      })
-    }
-
-    function displaySearchResult(result) {
-      var resultList = $('#article-list')
-      result.forEach(function (article) {
-      	var [month, day] = article.date.split('-')
-        ''
-        ''
-        var defaultPreview = '/imgs/preview/preview1.jpg'
-        var preview = article.preview ? article.preview : defaultPreview
-        var path = '/' + article.path
-        resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-                                <div class="data-article hidden-xs">
-                                    <span class="month">${month}月</span>
-                                    <span class="day">${day}</span>
-                                </div>
-                                <section class="hidden-xs">
-                                    <div class="title-article">
-                                        <h1>
-                                            <a href="${path}">
-                                                <span>${article.title}</span>
-                                            </a>
-                                        </h1>
-                                    </div>
-                                    <div class="tag-article">
-                                    ${ article.tags.length > 0 ? `<span class="label label-gal"><i class="fa fa-tags"></i>${
-                                    	article.tags.map(function (tag) {
-						                 return `<a href=${ tag.permalink }>${ tag.name }</a>`
-                                    	}).join(', ') }</span>` : '' }
-                                    ${ useLeancloud ? '<span class="label label-gal"><i class="fa fa-eye"></i></span>' : ''}
-                                    </div>
-                                    <div class="alert alert-gal article-body content-article">
-                                         <div class="item">
-                                            <a href="${path}">
-                                                <div class="img">
-                                                    <img src="${preview}" alt="${article.title}">
-                                                </div>
-                                                <div class="info">
-                                                    <p>${article.excerpt}</p>
-                                                </div>
-                                            </a>
-                                         </div>
-					                </div>
-					            </section>
-                           </div>`)
-      })
-      if (useLeancloud) {
-        var Counter = AV.Object.extend('Counter')
-        showPostsTime(Counter)
-      }
-      if (useComment) {
-      	showCommentCount()
-      }
-    }
-
-    function displayPagination(result) {
-      var pgContainer = $('#gal-pagination')
-      var pg = $(pgContainer.find('.pagination-gal')[0])
-      if(result.length > 0) {
-        pgContainer.css('display', 'block')
-      }
-      var num = Math.ceil(result.length / pageSize)
-      var root = '/search'
-      var link = root + `/index.html?s=${s}`
-      if(p > 1) {
-      	pg.append(`<li class="prev"><a href="${link}&page=${p-1}">«</a></li>`)
-      }
-      if(p > 7) {
-      	pg.append(`<li><a href="${link}">1</a></li>
-                   <li><span>...</span></li>`)
-        for(var i = p - 3; i < p; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-      } else {
-      	for(var j = 1; j < p; j++) {
-          pg.append(`<li><a href="${link}${j === 1 ? '' : `&page=${j}`}">${j}</a></li>`)
-        }
-      }
-      pg.append(`<li class="current"><span>${p}</span></li>`)
-      if(p + 7 < num) {
-      	for(var i = p + 1; i <= p + 3; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-        pg.append(`<li><span>...</span></li>`)
-      } else {
-      	for(var j = p + 1; j <= num; j++) {
-          pg.append(`<li><a href="${link}&page=${j}">${j}</a></li>`)
-        }
-      }
-      if(p < num) {
-      	pg.append(`<li class="next"><a href="${link}&page=${p+1}">»</a></li>`)
-      }
-    }
-
-    function showPostsTime(Counter) {
-      var entries = []
-      var excerpts = $('.article-excerpt')
-      excerpts.each(function () {
-        entries.push($(this).find('.title-article').first().find('a').attr('href').trim())
-      })
-      var query = new AV.Query(Counter)
-      query.containedIn('url', entries)
-      query.find().then(function (result) {
-        excerpts.each(function () {
-          var href = $(this).find('.title-article').first().find('a').attr('href').trim()
-          var r = result.filter(function (e) {
-            return e.get('url') === href
-          })
-          if(r.length > 0) {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' ' + r[0].get('time') + ' ℃')
-            })
-          } else {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' 0 ℃')
-            })
-          }
-        })
-      }).then(function (error) {
-        console.log('Error:' + error.code + ' ' + error.message)
-      })
-    }
-
-    function showCommentCount() {
-      const excerpts = $('.article-excerpt')
-      const owner = window.commentConfig.owner
-      const repo = window.commentConfig.repo
-      $.ajax({
-        url: "https://api.github.com/repos/" + owner + '/' + repo + '/issues',
-        data: {
-          creator: owner
-        }
-      }).done(function(issues) {
-        excerpts.each(function () {
-          const that = $(this)
-          that.find('h1 > a > span').each(function () {
-            const title = $(this).text()
-            const tags = that.find('div.tag-article')
-            const issue = issues.filter(function (issue) {
-              return issue.title === title
-            })
-            const comments = issue.length > 0 ? issue[0].comments : 0
-            tags.each(function () {
-              $(this).append('<span class="label label-gal"><i class="fa fa-comments"></i><a> ' + comments + '</a></span>')
-            })
-          })
-        })
-      }).fail(function (error) {
-        console.log(error)
-      });
-    }
-
-</script>
-<div class="breadcrumb breadcrumb-gal" id="search-breadcrumb">
-    <i class="fa fa-home"></i>
-</div>
-<div id="article-list"></div>
-<div id="gal-pagination" class="clearfix" style="display: none;">
-    <ul class="pagination pagination-gal pull-right"></ul>
-</div>
-<!-- 404页面 -->
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -605,17 +473,17 @@
 
                 
                 <li>
-                    <a href="/search/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 
                 
                 <li>
-                    <a href="/search/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 
                 
                 <li>
-                    <a href="/search/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2019/06/19/Nginx与tomcat组合的简单使用/Nginx与tomcat组合的简单使用/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
                 
             </ul>
@@ -623,23 +491,23 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Nginx与tomcat/" style="font-size: 18.161799561204717px;" class="tag-cloud-link">Nginx与tomcat</a>
+    <a href="/tags/Nginx与tomcat/" style="font-size: 15.422473795911236px;" class="tag-cloud-link">Nginx与tomcat</a>
     
-    <a href="/tags/数据结构与算法/" style="font-size: 18.931755370946505px;" class="tag-cloud-link">数据结构与算法</a>
+    <a href="/tags/数据结构与算法/" style="font-size: 8.812424543860928px;" class="tag-cloud-link">数据结构与算法</a>
     
-    <a href="/tags/二叉树/" style="font-size: 13.700292656915806px;" class="tag-cloud-link">二叉树</a>
+    <a href="/tags/二叉树/" style="font-size: 14.36121562665916px;" class="tag-cloud-link">二叉树</a>
     
-    <a href="/tags/手办/" style="font-size: 12.02006933882645px;" class="tag-cloud-link">手办</a>
+    <a href="/tags/手办/" style="font-size: 19.909916964712316px;" class="tag-cloud-link">手办</a>
     
-    <a href="/tags/杂谈/" style="font-size: 14.943150627311942px;" class="tag-cloud-link">杂谈</a>
+    <a href="/tags/杂谈/" style="font-size: 13.00220402671814px;" class="tag-cloud-link">杂谈</a>
     
-    <a href="/tags/插入排序/" style="font-size: 9.559891562055157px;" class="tag-cloud-link">插入排序</a>
+    <a href="/tags/插入排序/" style="font-size: 11.734808184072557px;" class="tag-cloud-link">插入排序</a>
     
-    <a href="/tags/快速排序/" style="font-size: 8.961129930412229px;" class="tag-cloud-link">快速排序</a>
+    <a href="/tags/快速排序/" style="font-size: 8.28266494086025px;" class="tag-cloud-link">快速排序</a>
     
-    <a href="/tags/二分查找/" style="font-size: 14.755747254680632px;" class="tag-cloud-link">二分查找</a>
+    <a href="/tags/二分查找/" style="font-size: 13.266185094842475px;" class="tag-cloud-link">二分查找</a>
     
-    <a href="/tags/轻小说/" style="font-size: 17.044240824092732px;" class="tag-cloud-link">轻小说</a>
+    <a href="/tags/轻小说/" style="font-size: 16.73084684838109px;" class="tag-cloud-link">轻小说</a>
     
 </div>
                 
